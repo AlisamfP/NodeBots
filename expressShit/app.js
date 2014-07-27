@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var five = require('johnny-five');
 
 //route handlers
+var index = require('./routes/index');
 var startStrobe = require('./routes/startStrobe');
 var endStrobe = require('./routes/endStrobe');
 
@@ -27,6 +28,7 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/', index);
 app.use('/startStrobe', startStrobe);
 app.use('/endStrobe', endStrobe);
 
