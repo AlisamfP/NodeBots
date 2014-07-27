@@ -4,9 +4,16 @@ var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var five = require('johnny-five');
 
+//route handlers
 var routes = require('./routes/index');
-var users = require('./routes/users');
+var startStrobe = require('./routes/startStrobe');
+var endStrobe = require('./routes/endStrobe');
+
+//lib
+var board = require('./lib/five');
+var boardFunc = require('./lib/boardFnc');
 
 var app = express();
 
@@ -55,6 +62,10 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
-
+board.on("ready", function(){
+    boardFunc.register();
+    app.listen(3000);
+    console.log("Server started");
+})
 
 module.exports = app;
