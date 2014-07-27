@@ -7,12 +7,11 @@ var bodyParser = require('body-parser');
 var five = require('johnny-five');
 
 //route handlers
-var routes = require('./routes/index');
 var startStrobe = require('./routes/startStrobe');
 var endStrobe = require('./routes/endStrobe');
 
 //lib
-var board = require('./lib/five');
+var board = require('./lib/fiveClient');
 var boardFunc = require('./lib/boardFnc');
 
 var app = express();
@@ -28,9 +27,8 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
-app.use('routes/startStrobe', startStrobe);
-app.use('routes/endStrobe', endStrobe);
+app.use('/startStrobe', startStrobe);
+app.use('/endStrobe', endStrobe);
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -62,10 +60,10 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
-board.on("ready", function(){
+board.on('ready', function(){
     boardFunc.register();
-    app.listen(3000);
-    console.log("Server started");
+    app.listen(8000);
+    console.log('Server started');
 })
 
 module.exports = app;
