@@ -5,6 +5,6 @@ block content
   p Welcome to #{title}
 
 
-  button(class="btnOn") STROBE ON
-  button(class="btnOff") STROBE OFF
-
+  button(class="btn" method="post") <a href="/startStrobe">STROBE ON</a>
+  button(class="btn" method="post") <a href="/endStrobe">STROBE OFF</a>
+  button(class="btn" method="post") <a href="/turnServo">TURN SERVO</a>

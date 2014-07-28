@@ -9,6 +9,7 @@ var router = express.Router();
 /* GET strobe page. */
 router.get('/', function(req, res) {
     boardFunc.led.stop().off();
+    res.end();
 });
 
 module.exports = router;

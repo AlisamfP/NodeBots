@@ -5,11 +5,13 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var five = require('johnny-five');
+var request = require('superagent');
 
 //route handlers
 var index = require('./routes/index');
 var startStrobe = require('./routes/startStrobe');
 var endStrobe = require('./routes/endStrobe');
+var turnServo = require('./routes/turnServo');
 
 //lib
 var board = require('./lib/fiveClient');
@@ -28,9 +30,11 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 app.use('/', index);
 app.use('/startStrobe', startStrobe);
 app.use('/endStrobe', endStrobe);
+app.use('/turnServo', turnServo);
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
